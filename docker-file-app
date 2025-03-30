@@ -7,22 +7,17 @@ WORKDIR /app
 # Copy only the requirements file first to leverage Docker caching
 COPY requirements.txt .
 
-# Install system dependencies for OpenCV, X11, and Qt
+# Install system dependencies for OpenCV
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender1 \
-    qt6-base-dev \
-    libqt6widgets6 && \
+    libglib2.0-0 && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# Install Python dependencies in a separate directory
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application files
 COPY . .
 
 # Set the command to run the application
-CMD ["python", "live-app.py"]
+CMD ["python", "app.py"]

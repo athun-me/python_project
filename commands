@@ -1,0 +1,9 @@
+## to run live app, enter the following commands
+1. xhost +local:docker   # Allow Docker to access your display
+2. docker tag athunlal/live-app live-app # Rename the images optional
+3. docker run --device=/dev/video0 -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -it live-app
+
+
+## To run the app
+1. docker tag athunlal/python-app app
+2. docker run -p 5000:5000 app
